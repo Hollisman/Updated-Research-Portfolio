@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigate & Thrive: A Foundation Guide for Black Youth Leadership</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #d4a017;
+            --green: #1a5c3a;
+            --cream: #f5f0e8;
+            --dark: #1a1a1a;
+            --text: #2d2d2d;
+            --accent: #e8d4a8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #0f0f0f;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            color: var(--cream);
+            padding: 60px 40px;
+            text-align: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5em;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        header p {
+            font-size: 1.2em;
+            font-style: italic;
+            color: var(--cream);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-section {
+            background-color: #1a1a1a;
+            color: var(--cream);
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2em;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            max-width: 900px;
+            margin: 0 auto 15px;
+            font-size: 1.1em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            background-color: #1a1a1a;
+            padding: 30px 20px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .nav-tabs button {
+            background-color: #2a2a2a;
+            color: var(--cream);
+            border: 2px solid var(--gold);
+            padding: 12px 20px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-tabs button:hover {
+            background-color: var(--gold);
+            color: var(--dark);
+        }
+
+        .nav-tabs button.active {
+            background-color: var(--gold);
+            color: var(--dark);
+        }
+
+        .tab-content {
+            display: none;
+            background-color: #0f0f0f;
+            color: var(--cream);
+            padding: 50px 40px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5em;
+            color: var(--gold);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .module-section {
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-left: 5px solid var(--gold);
+        }
+
+        .module-section h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8em;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .module-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .stat-box {
+            background-color: #2a2a2a;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid var(--green);
+        }
+
+        .stat-box strong {
+            color: var(--gold);
+        }
+
+        .spotlight {
+            background-color: #2a2a2a;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 5px;
+            border-top: 3px solid var(--green);
+        }
+
+        .spotlight h4 {
+            color: var(--gold);
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .spotlight p {
+            color: var(--cream);
+            margin-bottom: 10px;
+        }
+
+        .key-points {
+            background-color: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--green);
+        }
+
+        .key-points ul {
+            list-style-position: inside;
+            margin-left: 0;
+        }
+
+        .key-points li {
+            margin: 10px 0;
+            color: var(--cream);
+        }
+
+        .hbcu-profile {
+            background-color: #2a2a2a;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--gold);
+            border-radius: 5px;
+        }
+
+        .hbcu-profile h5 {
+            color: var(--gold);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .hbcu-profile p {
+            color: var(--cream);
+            margin: 8px 0;
+        }
+
+        .reflection-question {
+            background-color: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--green);
+            border-radius: 3px;
+        }
+
+        .reflection-question strong {
+            color: var(--gold);
+            font-size: 1.1em;
+        }
+
+        .student-voice {
+            background-color: #2a2a2a;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid var(--gold);
+            border-radius: 3px;
+        }
+
+        .student-voice p {
+            font-style: italic;
+            color: var(--accent);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .student-voice .attribution {
+            color: var(--green);
+            font-size: 0.95em;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .source-box {
+            background-color: #1a1a1a;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid var(--gold);
+            font-size: 0.9em;
+        }
+
+        .source-box strong {
+            color: var(--gold);
+        }
+
+        .source-box a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .source-box a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: var(--cream);
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid var(--gold);
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        .how-to-use {
+            background-color: #2a2a2a;
+            padding: 30px;
+            max-width: 900px;
+            margin: 30px auto;
+            border: 2px solid var(--green);
+        }
+
+        .how-to-use h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .how-to-use ol {
+            margin-left: 20px;
+        }
+
+        .how-to-use li {
+            margin: 12px 0;
+            color: var(--cream);
+        }
+
+        .data-comparison {
+            background-color: #1a1a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--gold);
+        }
+
+        .data-comparison table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--cream);
+        }
+
+        .data-comparison th {
+            background-color: var(--gold);
+            color: var(--dark);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .data-comparison td {
+            padding: 10px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .data-comparison tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            .nav-tabs { flex-direction: column; }
+            .nav-tabs button { width: 100%; }
+            .module-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Navigate & Thrive</h1>
+    <p>A Foundation Guide for Black Youth Leadership</p>
+    <p style="font-size: 1em; margin-top: 15px; font-style: normal;">Your personalized resource for thinking deeply about identity, belonging, leadership, and your path forward</p>
+</header>
+
+<div class="intro-section">
+    <h2>What Is This Guide?</h2>
+    <p>This is <strong>not a research paper</strong>—it's your foundation. A jumping-off point for <strong>you</strong> to think critically about topics that matter to your life right now: what it means to be a Black youth in elite spaces, how to build community, protect your mental health, claim your power, and lead with authenticity.</p>
+    <p>Each section includes data, voices from students like you, and <strong>reflection questions</strong> designed to help you add your own thinking, research, and experiences.</p>
+    <p>Use this guide to explore, question, and build the knowledge that's uniquely yours.</p>
+</div>
+
+<div class="nav-tabs">
+    <button class="tab-button active" onclick="openTab(event, 'overview')">Overview</button>
+    <button class="tab-button" onclick="openTab(event, 'digital')">Digital Spaces</button>
+    <button class="tab-button" onclick="openTab(event, 'mental')">Mental Health</button>
+    <button class="tab-button" onclick="openTab(event, 'civic')">Civic Power</button>
+    <button class="tab-button" onclick="openTab(event, 'regional')">LA & California</button>
+    <button class="tab-button" onclick="openTab(event, 'pwi')">PWI & HBCU</button>
+    <button class="tab-button" onclick="openTab(event, 'voices')">Student Voices</button>
+    <button class="tab-button" onclick="openTab(event, 'sources')">Sources</button>
+</div>
+
+<!-- OVERVIEW TAB -->
+<div id="overview" class="tab-content active">
+    <h2>Your Foundation: What You'll Explore</h2>
+
+    <div class="module-section">
+        <h3>Why This Guide Matters</h3>
+        <p>You're entering a critical moment in your life—summer leadership development, a private school experience, and the real work of figuring out who you are in spaces where you may be "one of the few." This guide is built for that journey.</p>
+        <p>The data, stories, and frameworks here are <strong>starting points</strong>, not answers. Your job is to engage with them, question them, and build your own analysis based on your lived experience.</p>
+    </div>
+
+    <div class="module-section">
+        <h3>Key Stats to Know</h3>
+        <div class="stat-box">
+            <strong>28%</strong> of Black teens spend time on TikTok "almost constantly"—and they're reshaping digital culture.
+        </div>
+        <div class="stat-box">
+            <strong>45.9%</strong> of Black students report experiencing racism at school.
+        </div>
+        <div class="stat-box">
+            <strong>83%</strong> of students at HBCUs report a strong sense of belonging, compared to 72% at PWIs.
+        </div>
+        <div class="stat-box">
+            <strong>49 million</strong> Gen Z youth are eligible to vote in 2026. <strong>5.7 million</strong> are Black youth.
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>How to Use This Guide</h3>
+        <div class="how-to-use">
+            <ol>
+                <li><strong>Read, but don't just receive.</strong> Question the data. Does it match what you see in your world?</li>
+                <li><strong>Answer the reflection questions.</strong> Write them down, talk them out, sit with them. Your thinking matters.</li>
+                <li><strong>Go deeper.</strong> Follow the source links. Find your own research. Become the expert on YOUR experience.</li>
+                <li><strong>Build it out.</strong> Add your own case studies, quotes, frameworks. Make this guide a true reflection of what you're learning.</li>
+                <li><strong>Share it forward.</strong> Use these conversations with friends, family, mentors. Leadership starts with honest dialogue.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>The Sections You'll Explore</h3>
+        <div class="key-points">
+            <ul>
+                <li><strong>Digital Spaces & Identity:</strong> You built the internet. Now you're running it. What does that power mean?</li>
+                <li><strong>Mental Health & Resilience:</strong> Thriving isn't just surviving. Learn the science of Black youth mental health and protective factors.</li>
+                <li><strong>Civic Power & Education Policy:</strong> Your voice matters. 49M Gen Z votes = real power. Understand the systems and how to move them.</li>
+                <li><strong>LA & California:</strong> Home truths. Local data on economic justice, education equity, and opportunity gaps in your region.</li>
+                <li><strong>PWI & HBCU Landscape:</strong> The post-SFFA college era. What changed, why it matters, and frameworks for your decision-making.</li>
+                <li><strong>Student Voices:</strong> Real reflections from Black youth navigating elite spaces, prep schools, and PWIs. Your peers are here.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- DIGITAL SPACES TAB -->
+<div id="digital" class="tab-content">
+    <h2>Digital Spaces & Identity</h2>
+    <p style="text-align: center; font-size: 1.3em; color: var(--gold); margin-bottom: 30px; font-family: 'Bebas Neue';">We Built the Internet. Now We Run It.</p>
+
+    <div class="module-section">
+        <h3>The Black TikTok Phenomenon</h3>
+        <p><strong>28% of Black teens spend time on TikTok "almost constantly,"</strong> according to Pew Research 2024. But this isn't just about social media. It's about cultural production, digital entrepreneurship, and reshaping narrative.</p>
+        <div class="stat-box">
+            <strong>$15 billion+</strong> in economic value generated by Black creators across social platforms.
+        </div>
+        <p><strong>#BlackTikTok and #HillmanTok</strong> represent decentralized classrooms where Gen Z is teaching itself history, culture, and resistance—outside traditional systems.</p>
+    </div>
+
+    <div class="module-section">
+        <h3>Code-Switching Online vs. Offline</h3>
+        <p>You exist in multiple spaces simultaneously—a carefully curated self at Buckley, an authentic self online, and the code-switching in between. Research shows that this constant negotiation of identity creates real cognitive load and stress.</p>
+        <div class="stat-box">
+            <strong>The data is clear:</strong> Online spaces can buffer against offline discrimination and isolation. They can also amplify it. Understanding which spaces serve you is critical.
+        </div>
+    </div>
+
+    <div class="spotlight">
+        <h4>Creator Spotlight: Kahlil Greene (@kahlilgreene)</h4>
+        <p><strong>639K+ followers | "The Gen Z Historian"</strong></p>
+        <p>Kahlil uses TikTok to teach Black history, call out cultural appropriation, and build community around authentic representation. He's proof that social platforms aren't just for entertainment—they're for education, leadership, and movement-building.</p>
+        <p><strong>Reflection:</strong> What would it look like to use your digital presence as a platform for leadership? What stories are you telling?</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Your Reflection Questions:</strong>
+        <ul style="list-style-position: inside; margin-left: 0;">
+            <li>How do you show up differently online vs. at Buckley? Is that intentional or reactive?</li>
+            <li>What digital communities make you feel most like yourself?</li>
+            <li>If you had 10K followers, what would you want to teach or share?</li>
+            <li>How does social media impact your sense of identity and belonging?</li>
+        </ul>
+    </div>
+
+    <div class="source-box">
+        <strong>Sources:</strong><br>
+        <a href="https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/">Pew Research: Teens, Social Media & Technology 2024</a><br>
+        <a href="https://newsroom.tiktok.com/en-us/celebrating-the-impact-of-black-tiktok">TikTok: Celebrating the Impact of Black TikTok</a>
+    </div>
+</div>
+
+<!-- MENTAL HEALTH TAB -->
+<div id="mental" class="tab-content">
+    <h2>Mental Health & Resilience</h2>
+    <p style="text-align: center; font-size: 1.3em; color: var(--gold); margin-bottom: 30px; font-family: 'Bebas Neue';">We Don't Just Survive. We Thrive.</p>
+
+    <div class="module-section">
+        <h3>Meet Dr. Jasmin Brooks Stephens (UC Berkeley ESSENCE Lab)</h3>
+        <p><strong>Forbes 30 Under 30 Healthcare 2025</strong> | Leading research on Black youth mental health & suicide prevention</p>
+        <p>Dr. Stephens' breakthrough research links <strong>racial discrimination directly to increased suicide capability among Black adults</strong>. But more importantly, her work centers Black youth thriving through six protective factors.</p>
+    </div>
+
+    <div class="module-section">
+        <h3>The Black Youth Thriving Framework (6 Protective Factors)</h3>
+        <div class="key-points">
+            <ul>
+                <li><strong>Intrapersonal Assets:</strong> Your beliefs in yourself, resilience, coping strategies</li>
+                <li><strong>Kinship Support:</strong> Family, close relationships, people who know your full self</li>
+                <li><strong>Collective Socialization:</strong> Community that teaches you about your culture, history, power</li>
+                <li><strong>Black Cultural Identity:</strong> Pride, knowledge, connection to heritage</li>
+                <li><strong>Hope & Future Orientation:</strong> Belief that better futures are possible for you and your community</li>
+                <li><strong>Religious/Spiritual Coping:</strong> Practices that ground, center, and sustain you</li>
+            </ul>
+        </div>
+        <p><strong>The question for you:</strong> Which of these factors are strongest in your life right now? Which need attention?</p>
+    </div>
+
+    <div class="module-section">
+        <h3>Code-Switching as Chronic Stress</h3>
+        <p>The science is clear: <strong>constantly navigating between authentic self and adapted self creates cognitive load, hypervigilance, and measurable health impacts</strong>—linked to heart disease, stroke, and diabetes in adult Black populations.</p>
+        <p>At an elite prep school, you may find yourself code-switching daily. This is real work. It requires real protection.</p>
+    </div>
+
+    <div class="module-section">
+        <h3>HBCU vs. PWI Mental Health Outcomes</h3>
+        <div class="data-comparison">
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>HBCU</th>
+                    <th>PWI</th>
+                    <th>National Average</th>
+                </tr>
+                <tr>
+                    <td>Students "Flourishing" Mentally</td>
+                    <td>45%</td>
+                    <td>38%</td>
+                    <td>36%</td>
+                </tr>
+                <tr>
+                    <td>Sense of Belonging</td>
+                    <td>83%</td>
+                    <td>72%</td>
+                    <td>—</td>
+                </tr>
+            </table>
+        </div>
+        <p><strong>What this means:</strong> The difference between attending an institution where everyone looks like you (or mostly does) vs. being one of the few is measurable in mental health and belonging.</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Your Reflection Questions:</strong>
+        <ul style="list-style-position: inside; margin-left: 0;">
+            <li>Which of the six protective factors do you have access to right now?</li>
+            <li>How does code-switching show up in your daily life at Buckley?</li>
+            <li>What practices help you stay grounded and centered?</li>
+            <li>Who in your life reflects back to you that you belong exactly as you are?</li>
+        </ul>
+    </div>
+
+    <div class="spotlight">
+        <h4>Creator Spotlight: Dr. Jasmin Brooks Stephens (@dr.jasminbstephens)</h4>
+        <p>Follow her for cutting-edge research on Black mental health, resilience, and prevention. Her work is reframing how we think about Black youth not just surviving but thriving.</p>
+    </div>
+
+    <div class="source-box">
+        <strong>Sources:</strong><br>
+        <a href="https://theessencelab.org/">ESSENCE Lab (UC Berkeley)</a><br>
+        <a href="https://sph.umich.edu/news/2025posts/hbcu-students-show-better-mental-health-outcomes-despite-support-gaps.html">University of Michigan: HBCU Mental Health Outcomes 2025</a>
+    </div>
+</div>
+
+<!-- CIVIC POWER TAB -->
+<div id="civic" class="tab-content">
+    <h2>Civic Power & Education Policy</h2>
+    <p style="text-align: center; font-size: 1.3em; color: var(--gold); margin-bottom: 30px; font-family: 'Bebas Neue';">50 Million Strong. Use the Power.</p>
+
+    <div class="module-section">
+        <h3>The Numbers: Gen Z Political Power in 2026</h3>
+        <div class="stat-box">
+            <strong>49 million</strong> Gen Z youth are eligible to vote in 2026 midterms.
+        </div>
+        <div class="stat-box">
+            <strong>5.7 million</strong> of those are Black youth.
+        </div>
+        <div class="stat-box">
+            <strong>34%</strong> Black youth turnout in 2024 (vs. 55% White, 43% Asian)—but <strong>89% say they're willing to vote</strong>.
+        </div>
+        <p><strong>The real story:</strong> The gap isn't interest. It's economic barriers—time, transportation, childcare, work. When we remove those barriers, Black youth show up.</p>
+    </div>
+
+    <div class="module-section">
+        <h3>California Reparations & Policy</h3>
+        <p><strong>AB3121: California Reparations Task Force</strong> authored by Dr. Shirley Weber (CLBC leadership). Final report released June 29, 2023.</p>
+        <p>This is your lived reality. Understanding policy—how it's made, who gets to decide, how to move it—is leadership work.</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Your Reflection Questions:</strong>
+        <ul style="list-style-position: inside; margin-left: 0;">
+            <li>What policy issues matter most to you and your community?</li>
+            <li>Do you know how to register to vote? When you're eligible?</li>
+            <li>What barriers do you see keeping Black youth from voting?</li>
+            <li>How would you mobilize your generation if you had the platform?</li>
+        </ul>
+    </div>
+
+    <div class="source-box">
+        <strong>Sources:</strong><br>
+        <a href="https://circle.tufts.edu/latest-research/49-million-young-people-will-be-eligible-vote-2026-midterms">CIRCLE (Tufts): 49 Million Gen Z Eligible to Vote 2026</a><br>
+        <a href="https://oag.ca.gov/ab3121/report">California Reparations Task Force Final Report</a>
+    </div>
+</div>
+
+<!-- REGIONAL TAB -->
+<div id="regional" class="tab-content">
+    <h2>LA & California: Home Truths</h2>
+    <p style="text-align: center; font-size: 1.3em; color: var(--gold); margin-bottom: 30px; font-family: 'Bebas Neue';">Local Data. State Power. Your Community.</p>
+
+    <div class="module-section">
+        <h3>State of Black Los Angeles County (2025)</h3>
+        <div class="stat-box">
+            Black population: <strong>9.4%</strong> of LA County<br>
+            Experiencing homelessness: <strong>32%</strong> of homeless population (massive overrepresentation)
+        </div>
+        <div class="stat-box">
+            Poverty rate: <strong>36.2%</strong> (up from 29%) | Rent-burdened: <strong>65%</strong>
+        </div>
+        <div class="stat-box">
+            LAUSD: <strong>17,245 homeless students</strong> (up 26%) | Chronic absenteeism among Black students: <strong>+13.3 percentage points</strong>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>California Equity Index (UCLA Bunche Center)</h3>
+        <div class="stat-box">
+            Black Californians equity index: <strong>0.69 out of 1.00</strong> (White baseline)<br>
+            Time to close gap: <strong>248 years</strong> at current rate
+        </div>
+        <p><strong>What this means:</strong> The systems that create these gaps are deep. Changing them requires strategic, persistent pressure—and young people leading.</p>
+    </div>
+
+    <div class="module-section">
+        <h3>Elite Prep Schools in LA: The Buckley Context</h3>
+        <p>Schools like Buckley average <strong>3-8% Black enrollment</strong>. Research on "the psychological cost of being one of the few" shows real impacts on belonging, mental health, and social integration.</p>
+        <p>You're inside a system built for different people. That's not a flaw in you. That's a feature of the system.</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Your Reflection Questions:</strong>
+        <ul style="list-style-position: inside; margin-left: 0;">
+            <li>What inequities do you see in your community right now?</li>
+            <li>How does Buckley's demographic compare to LA's? What does that mean?</li>
+            <li>If you could change one policy affecting Black LA, what would it be?</li>
+        </ul>
+    </div>
+
+    <div class="source-box">
+        <strong>Sources:</strong><br>
+        <a href="https://ceo.lacounty.gov/ardi/sbla/">LA County CEO: State of Black LA County 2025</a><br>
+        <a href="https://bunchecenter.ucla.edu/reports/state-of-black-california-2024/">UCLA Bunche Center: State of Black California 2024</a>
+    </div>
+</div>
+
+<!-- PWI & HBCU TAB -->
+<div id="pwi" class="tab-content">
+    <h2>PWI & HBCU Landscape</h2>
+    <p style="text-align: center; font-size: 1.3em; color: var(--gold); margin-bottom: 30px; font-family: 'Bebas Neue';">One of the Few. None of the Less.</p>
+
+    <div class="module-section">
+        <h3>The Post-SFFA Collapse (June 29, 2023)</h3>
+        <p>When the Supreme Court overturned affirmative action, elite college enrollment of Black students plummeted overnight:</p>
+        <div class="stat-box">
+            <strong>Harvard:</strong> 18% → 11.5%<br>
+            <strong>Princeton:</strong> 9% → 5% (lowest since 1968)<br>
+            <strong>Amherst:</strong> 11% → 6%<br>
+            <strong>Caltech:</strong> 5% → 1.6%
+        </div>
+        <p><strong>Only 2 of 29 elite institutions</strong> maintain ≥10% Black enrollment. 11 are now at ≤5%.</p>
+        <p>This is the landscape you're preparing for. Understanding it matters.</p>
+    </div>
+
+    <div class="module-section">
+        <h3>5 PWI Mental Health Risk Factors (Research-Based)</h3>
+        <div class="key-points">
+            <ul>
+                <li><strong>Microaggressions:</strong> Daily subtle racism, code-switching, hypervigilance</li>
+                <li><strong>Racial Isolation:</strong> Being one of few, eating at separate tables, social exclusion</li>
+                <li><strong>Impostor Syndrome:</strong> "Did I really earn this?" pressure to prove yourself constantly</li>
+                <li><strong>White Institutional Presence:</strong> Faculty, curriculum, norms built for and by white people</li>
+                <li><strong>Lack of Resources:</strong> No affinity groups, culturally competent counseling, financial aid</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>HBCU Profiles: Six Institutions to Know</h3>
+
+        <div class="hbcu-profile">
+            <h5>Howard University (Washington, DC)</h5>
+            <p><strong>Founded:</strong> 1867 | <strong>Students:</strong> 11,519 | <strong>6-yr graduation:</strong> 60%</p>
+            <p><strong>Why it matters:</strong> 130K+ alumni network. VP Harris, Thurgood Marshall, Toni Morrison, Chadwick Boseman graduated here. DC Capitol access for internships and policy work.</p>
+            <p><strong>200+ student orgs</strong> | Deep ties to Black political leadership</p>
+        </div>
+
+        <div class="hbcu-profile">
+            <h5>Spelman College (Atlanta, GA)</h5>
+            <p><strong>Founded:</strong> 1881 | <strong>Students:</strong> 2,300 | <strong>Graduation Rate:</strong> 75% (HIGHEST HBCU)</p>
+            <p><strong>Why it matters:</strong> #1 HBCU (18 consecutive years). 34% STEM majors. Leading producer of Black women STEM PhDs. DoD Center of Excellence for Minority Women in STEM.</p>
+            <p><strong>Sister school network</strong> with Morehouse creates powerful community</p>
+        </div>
+
+        <div class="hbcu-profile">
+            <h5>Morehouse College (Atlanta, GA)</h5>
+            <p><strong>Founded:</strong> 1867 | <strong>Students:</strong> 3,000+ | <strong>6-yr graduation:</strong> 53%</p>
+            <p><strong>Why it matters:</strong> ONLY all-male HBCU. MLK Jr., Jesse Jackson, Spike Lee graduated here. 33 majors. Future Teachers Excellence Fellowship (~160 fellows annually).</p>
+            <p><strong>Deep brotherhood culture</strong> | Atlanta location (tech hub, companies recruiting)</p>
+        </div>
+
+        <div class="hbcu-profile">
+            <h5>NC A&T (Greensboro, NC)</h5>
+            <p><strong>Founded:</strong> 1891 | <strong>Students:</strong> 15,275 | <strong>Graduation Rate:</strong> 64% (↑ from 54%)</p>
+            <p><strong>Why it matters:</strong> FIRST HBCU EVER TO HIT 15K+ STUDENTS. 12th consecutive year as nation's largest HBCU. #1 producer Black engineers & agricultural scientists.</p>
+            <p><strong>NEW:</strong> Bachelor's in Artificial Intelligence (only HBCU). $90M Engineering Research & Innovation Center. Partnerships with Toyota, JetZero.</p>
+            <p><strong>83.7% employed by graduation | $54.9K mean starting salary</strong></p>
+        </div>
+
+        <div class="hbcu-profile">
+            <h5>Hampton University (Hampton, VA)</h5>
+            <p><strong>Founded:</strong> 1868 | <strong>Students:</strong> 4,686 | <strong>Graduation Rate:</strong> 64% (↑ from 54%)</p>
+            <p><strong>Why it matters:</strong> 46% enrollment surge since 2022 (post-SFFA). Carnegie R2 Classification 2024 (only private university in Virginia). 100+ student orgs. ROTC (Army, Navy, Marine).</p>
+            <p><strong>School of Pharmacy expansion</strong> | Vibrant waterfront campus</p>
+        </div>
+
+        <div class="hbcu-profile">
+            <h5>Fisk University (Nashville, TN)</h5>
+            <p><strong>Founded:</strong> 1866 | <strong>Students:</strong> ~900 | <strong>Type:</strong> Intimate liberal arts</p>
+            <p><strong>Why it matters:</strong> Historic Jubilee Singers. Hidden gem for close mentoring. Deep faculty-student relationships. Strong alumni network in music, education, activism.</p>
+        </div>
+
+        <p style="margin-top: 30px; color: var(--gold); font-weight: 600;">HBCU Surge Post-SFFA: Howard +79% applications, Shaw +36% enrollment, Morehouse 300 over capacity, Hampton +46% overall.</p>
+    </div>
+
+    <div class="module-section">
+        <h3>Decision Framework: PWI vs. HBCU</h3>
+        <div class="data-comparison">
+            <table>
+                <tr>
+                    <th>Factor</th>
+                    <th>HBCU Advantage</th>
+                    <th>PWI Advantage</th>
+                </tr>
+                <tr>
+                    <td>Belonging & Mental Health</td>
+                    <td>83% report strong belonging</td>
+                    <td>72% report strong belonging</td>
+                </tr>
+                <tr>
+                    <td>Black Faculty & Mentorship</td>
+                    <td>Majority Black faculty</td>
+                    <td>Limited Black faculty</td>
+                </tr>
+                <tr>
+                    <td>Black Cultural Learning</td>
+                    <td>Woven into curriculum & culture</td>
+                    <td>Optional/separate courses</td>
+                </tr>
+                <tr>
+                    <td>Network & Opportunity</td>
+                    <td>Strong HBCU alumni networks</td>
+                    <td>Access to elite networks</td>
+                </tr>
+                <tr>
+                    <td>Racial Climate</td>
+                    <td>Affirming, centered</td>
+                    <td>Demanding, navigational</td>
+                </tr>
+                <tr>
+                    <td>Geographic Diversity</td>
+                    <td>Concentrated in South/DC</td>
+                    <td>Nationwide</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Your Reflection Questions:</strong>
+        <ul style="list-style-position: inside; margin-left: 0;">
+            <li>If you were choosing a college right now, what matters most to you: prestige, belonging, network, location, mission?</li>
+            <li>Have you visited an HBCU? Talked to current students?</li>
+            <li>What does "success" look like to you after college?</li>
+            <li>How much weight should belonging have in your decision?</li>
+        </ul>
+    </div>
+
+    <div class="source-box">
+        <strong>Sources:</strong><br>
+        <a href="https://www.brookings.edu/articles/the-complex-ramifications-of-students-for-fair-admissions-v-harvard/">Brookings: SFFA v. Harvard Analysis</a><br>
+        <a href="https://home.hamptonu.edu/blog/2025/11/19/hampton-university-redefines-growth-46-surge-in-enrollment-and-a-new-blueprint-for-student-belonging/">Hampton University: 46% Enrollment Surge</a><br>
+        <a href="https://www.ncat.edu/about/index.php">NC A&T: Institution Overview</a>
+    </div>
+</div>
+
+<!-- STUDENT VOICES TAB -->
+<div id="voices" class="tab-content">
+    <h2>Student Voices & Reflections</h2>
+    <p style="text-align: center; font-size: 1.3em; color: var(--gold); margin-bottom: 30px; font-family: 'Bebas Neue';">Hear From Peers Navigating Spaces Like Yours</p>
+
+    <div class="module-section">
+        <p>These are <strong>real reflections from Black students</strong> who have navigated elite prep schools, PWIs, and spaces where they were "one of the few." Their stories are different, but the themes are consistent. Read them. Sit with them. Ask yourself the same questions.</p>
+    </div>
+
+    <!-- VOICE 1: PWI ISOLATION -->
+    <div class="student-voice">
+        <p>"As quickly as the weather changed, I began to feel isolated, an African American woman at a predominantly white institution. The student body is 82 percent white. African Americans accounted for just 2.6 percent. Of course, I'd known the school was mostly white, but that hadn't fazed me. I was eager to meet new people with different backgrounds. What I hadn't counted on was how much the school didn't feel like a place where I could really fit in... It felt like I was starring in my own Netflix episode of 'Dear White People' every day."</p>
+        <p class="attribution">— Black woman, PWI (NDSU)</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Ask yourself:</strong> How does this mirror or differ from your experience at Buckley so far? When do you feel like you're "on" vs. relaxed?
+    </div>
+
+    <!-- VOICE 2: FINDING COMMUNITY -->
+    <div class="student-voice">
+        <p>"Being Black at a PWI and wanting to be around peers of color means having to work harder to feel comfortable and accepted in spaces. You have to find those organizations yourself, make those connections and be okay with taking up space in areas where not many people look like you."</p>
+        <p class="attribution">— Black student, Ball State University</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Ask yourself:</strong> What communities or organizations at Buckley help you feel like yourself? If they don't exist, what would it take to create them?
+    </div>
+
+    <!-- VOICE 3: CODE-SWITCHING & QUESTIONS ABOUT YOUR CULTURE -->
+    <div class="student-voice">
+        <p>"I have to be open to questions about my culture or my hair or something, and not put up a hard front. This prepared me for the worst-case scenario. When in history class you're talking about slavery, everyone will instantly look at you. Or you're talking about civil rights, everyone is like, 'What do you have to say about it?' It's exhausting to be tokenized, but I learned to set boundaries."</p>
+        <p class="attribution">— Black student, Elite Prep School</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Ask yourself:</strong> When are you asked to speak "for your people"? How do you respond? What boundaries do you want to set?
+    </div>
+
+    <!-- VOICE 4: BELONGING DESPITE CHALLENGES -->
+    <div class="student-voice">
+        <p>"My experience as a Black student at PWIs has been a struggle, but ultimately I have learned to be comfortable in my own skin regardless of my surroundings. Going to a PWI taught me to be loud in places where others thought I should be quiet. It taught me to stand up for what I believe in, despite who might be against me."</p>
+        <p class="attribution">— Black college student</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Ask yourself:</strong> What would it take for you to feel comfortable being yourself in spaces where you're the minority? What support do you need?
+    </div>
+
+    <!-- VOICE 5: BUCKLEY-SPECIFIC EXPERIENCE -->
+    <div class="student-voice">
+        <p>"The diversity on campus is overwhelmingly lackluster. The lack of diversity is represented in the spaces of the community and causes the voices of minorities to often go unheard. But I also found real friendships here with people who actually saw me. It's complicated."</p>
+        <p class="attribution">— Black student, Elite LA Prep School (similar to Buckley)</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Ask yourself:</strong> How do you experience diversity at Buckley? Who truly sees you there? What do you need to feel heard?
+    </div>
+
+    <!-- VOICE 6: ELITE PREP SCHOOL CULTURE SHOCK -->
+    <div class="student-voice">
+        <p>"You've always been the top of the class and now you're average. That's a big shock. But the big hurdle is learning to get the most out of the experience and not let it change who you are—not let the experience make you feel less than anyone else."</p>
+        <p class="attribution">— Black student entering elite prep school</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Ask yourself:</strong> Have you experienced this shift—feeling smaller or less in academic/social spaces? How do you reclaim your sense of worth?
+    </div>
+
+    <!-- VOICE 7: THE HBCU DIFFERENCE -->
+    <div class="student-voice">
+        <p>"At my former day school, you could barely make a community out of all the minorities. But at my HBCU, we have the Latino community and a Black community. Compared to my prep school, I was sheltered. Now I've been exposed to so much. I've tried different things. There are so many researchers and opportunities. I've done a lot more than just hit the books."</p>
+        <p class="attribution">— Black college student, HBCU transfer from prep school</p>
+    </div>
+
+    <div class="reflection-question">
+        <strong>Ask yourself:</strong> What would it feel like to be in a space where being Black is the norm, not the exception? Does that appeal to you? What would you gain? Give up?
+    </div>
+
+    <div class="module-section" style="background-color: #2a2a2a; padding: 30px; border-left: 5px solid var(--green); margin-top: 40px;">
+        <h3 style="color: var(--gold);">Your Story Matters</h3>
+        <p>These voices are here to help you think through your own experience. But <strong>your reflection is what transforms this guide from information to wisdom</strong>.</p>
+        <p>Write down your own story. Answer the reflection questions. Talk to your peers. Build your own analysis based on what you're actually living.</p>
+        <p style="margin-top: 20px; color: var(--accent); font-style: italic;">You are not alone in navigating these spaces. You are exactly where you need to be to lead.</p>
+    </div>
+</div>
+
+<!-- SOURCES TAB -->
+<div id="sources" class="tab-content">
+    <h2>Complete Source List</h2>
+    <p style="text-align: center; margin-bottom: 30px;">Click any link to dive deeper. Real research. Real data. Real stories.</p>
+
+    <div class="module-section">
+        <h3>Digital Spaces & Black Culture</h3>
+        <div class="source-box">
+            <a href="https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/">Pew Research: Teens, Social Media & Technology 2024</a><br>
+            <a href="https://newsroom.tiktok.com/en-us/celebrating-the-impact-of-black-tiktok">TikTok: Celebrating the Impact of Black TikTok</a>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>Mental Health & Resilience</h3>
+        <div class="source-box">
+            <a href="https://theessencelab.org/">ESSENCE Lab (UC Berkeley) - Dr. Jasmin Brooks Stephens</a><br>
+            <a href="https://psychology.berkeley.edu/people/jasmin-brooks-stephens">UC Berkeley Psychology: Dr. Jasmin Brooks Stephens</a><br>
+            <a href="https://sph.umich.edu/news/2025posts/hbcu-students-show-better-mental-health-outcomes-despite-support-gaps.html">University of Michigan: HBCU Students Show Better Mental Health Outcomes</a><br>
+            <a href="https://ampsychfdn.org/researchroundup-sp/">American Psychological Foundation: Research Roundup</a>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>Civic Power & Voting</h3>
+        <div class="source-box">
+            <a href="https://circle.tufts.edu/latest-research/49-million-young-people-will-be-eligible-vote-2026-midterms">CIRCLE (Tufts): 49 Million Gen Z Eligible to Vote 2026</a><br>
+            <a href="https://circle.tufts.edu/latest-research/black-youth-are-invested-their-communities-encounter-barriers-voting">CIRCLE: Black Youth Voting Barriers & Engagement</a><br>
+            <a href="https://oag.ca.gov/ab3121/report">California Reparations Task Force Final Report</a><br>
+            <a href="https://cablackcaucus.org/ca-reparations-report/">California Legislative Black Caucus: Reparations Report</a>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>LA & California Data</h3>
+        <div class="source-box">
+            <a href="https://ceo.lacounty.gov/ardi/sbla/">LA County CEO: State of Black LA County 2025</a><br>
+            <a href="https://bunchecenter.ucla.edu/reports/state-of-black-california-2024/">UCLA Bunche Center: State of Black California 2024</a><br>
+            <a href="https://bunchecenter.ucla.edu/reports/unequal-ground-black-californians-employment-in-a-shifting-economy-2024-2025/">UCLA Bunche Center: Unequal Ground (Employment)</a><br>
+            <a href="https://www.the74million.org/article/la-housing-crisis-hits-lausd-as-number-of-homeless-students-continues-to-grow/">The 74: LA Housing Crisis & LAUSD Homelessness</a>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>PWI & HBCU Landscape</h3>
+        <div class="source-box">
+            <a href="https://www.brookings.edu/articles/the-complex-ramifications-of-students-for-fair-admissions-v-harvard/">Brookings: Students for Fair Admissions v. Harvard Analysis</a><br>
+            <a href="https://www.naacpldf.org/case-issue/sffa-v-harvard-faq/">NAACP Legal Defense: SFFA v. Harvard FAQ</a><br>
+            <a href="https://home.hamptonu.edu/blog/2025/11/19/hampton-university-redefines-growth-46-surge-in-enrollment-and-a-new-blueprint-for-student-belonging/">Hampton University: 46% Enrollment Surge & Student Belonging</a><br>
+            <a href="https://www.ncat.edu/about/index.php">NC A&T: Institution Overview & Resources</a><br>
+            <a href="https://www.spelman.edu/coe-bws.html">Spelman College: Center of Excellence for Women in STEM</a><br>
+            <a href="https://admission.howard.edu/">Howard University: Admissions & Campus Life</a>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>Elite Prep School & Minority Student Experience</h3>
+        <div class="source-box">
+            <a href="https://www.inquirer.com/philly/living/20150729_Minorities_entering_elite_prep_schools_brace_for_culture_shock.html">Philadelphia Inquirer: Minorities at Elite Prep Schools (Culture Shock)</a><br>
+            <a href="https://www.the74million.org/article/analysis-clash-of-cultures-clash-of-privilege-what-happened-when-30-low-income-students-of-color-were-admitted-to-elite-prep-schools/">The 74: Clash of Cultures in Elite Prep Schools (Harvard Thesis)</a><br>
+            <a href="https://edition.cnn.com/2012/12/04/us/access-to-elite-education-but-feelings-of-exclusion-for-some-students-of-color/">CNN: Access vs. Exclusion at Elite Prep Schools</a><br>
+            <a href="https://www.buckley.org/about-us/diversity-equity-inclusion">Buckley School: Diversity, Equity & Inclusion</a>
+        </div>
+    </div>
+
+    <div class="module-section">
+        <h3>AALT Program & Leadership Context</h3>
+        <div class="source-box">
+            <a href="https://cablackcaucus.org/aalt/">California Legislative Black Caucus: AALT Program</a><br>
+            <a href="https://news.csudh.edu/sentinel-clbc-program/">CSU Dominguez Hills: CLBC AALT Program</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p><strong>Navigate & Thrive: A Foundation Guide for Black Youth Leadership</strong></p>
+    <p>Built for the AALT 2026 Summer Program | CSU Dominguez Hills | California Legislative Black Caucus</p>
+    <p>This is <strong>your resource</strong>. Use it. Question it. Build on it. Lead with it.</p>
+    <p style="margin-top: 20px; font-size: 0.9em; color: #999;">Last updated: June 2026</p>
+</footer>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tabbuttons;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+        tabbuttons = document.getElementsByClassName("tab-button");
+        for (i = 0; i < tabbuttons.length; i++) {
+            tabbuttons[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
