@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigate & Thrive: Self-Check Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #d4a017;
+            --green: #1a5c3a;
+            --cream: #f5f0e8;
+            --dark: #1a1a1a;
+            --text: #2d2d2d;
+            --accent: #e8d4a8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #0f0f0f;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            color: var(--cream);
+            padding: 40px;
+            text-align: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: var(--cream);
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background-color: #2a2a2a;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .progress-info {
+            color: var(--cream);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .progress-visual {
+            width: 100%;
+            max-width: 500px;
+            height: 8px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .question-block {
+            display: none;
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-left: 5px solid var(--gold);
+            margin-bottom: 15px;
+            border-radius: 3px;
+        }
+
+        .question-block.active {
+            display: block;
+        }
+
+        .question-number {
+            color: var(--gold);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.85em;
+            margin-bottom: 6px;
+        }
+
+        .question-text {
+            color: var(--cream);
+            font-size: 0.9em;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .question-type {
+            display: inline-block;
+            background-color: var(--green);
+            color: var(--cream);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-bottom: 12px;
+        }
+
+        .options {
+            margin: 15px 0;
+        }
+
+        .option {
+            background-color: #2a2a2a;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 4px solid #555;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--cream);
+            font-size: 0.95em;
+        }
+
+        .option:hover {
+            background-color: #333;
+            border-left-color: var(--gold);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: #2a2a2a;
+            color: var(--cream);
+            border: 1px solid var(--gold);
+            border-radius: 3px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+            min-height: 120px;
+            margin: 15px 0;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(212, 160, 23, 0.3);
+        }
+
+        .answer-key {
+            background-color: #2a2a2a;
+            border-left: 5px solid var(--green);
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .answer-key.revealed {
+            display: block;
+        }
+
+        .answer-key h4 {
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .answer-key p {
+            color: var(--accent);
+            line-height: 1.8;
+        }
+
+        .reveal-button {
+            background-color: var(--green);
+            color: var(--cream);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 15px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .reveal-button:hover {
+            background-color: #2a7c4a;
+            transform: translateY(-2px);
+        }
+
+        .reveal-button.revealed {
+            background-color: var(--gold);
+            color: var(--dark);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        button.nav {
+            background-color: var(--gold);
+            color: var(--dark);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        button.nav:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        button.nav:disabled {
+            background-color: #555;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .completion-message {
+            background-color: #2a2a2a;
+            border-left: 5px solid var(--green);
+            padding: 30px;
+            border-radius: 3px;
+            display: none;
+            text-align: center;
+        }
+
+        .completion-message.active {
+            display: block;
+        }
+
+        .completion-message h2 {
+            color: var(--gold);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .completion-message p {
+            color: var(--cream);
+            font-size: 1.1em;
+            margin: 15px 0;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: var(--cream);
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid var(--gold);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            .container { padding: 20px 10px; }
+            .question-block { padding: 20px; }
+            .nav-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Navigate & Thrive</h1>
+    <p>Self-Check Assessment</p>
+    <p style="font-size: 0.95em; font-style: italic;">27 questions covering all 8 sections | Answer honestly | Reveal answers at your own pace</p>
+</header>
+
+<div class="progress-bar">
+    <div class="progress-info">
+        <span id="current-question">Question 1</span> of <span id="total-questions">27</span>
+    </div>
+    <div class="progress-visual">
+        <div class="progress-fill" id="progress-fill"></div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Q1: Overview -->
+    <div class="question-block active">
+        <div class="question-number">Question 1</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">What is the purpose of this guide?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q1" value="a"> A) To provide finished research you should memorize</label>
+            <label class="option"><input type="radio" name="q1" value="b"> B) To serve as a foundation you build on with your own thinking</label>
+            <label class="option"><input type="radio" name="q1" value="c"> C) To tell you what to do after high school</label>
+            <label class="option"><input type="radio" name="q1" value="d"> D) To replace talking to mentors</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(1)">Reveal Answer</button>
+        <div class="answer-key" id="answer-1">
+            <h4>✓ Correct Answer: B</h4>
+            <p>The guide is explicitly a jumping-off point for you to build on with your own thinking and research, not finished research to memorize.</p>
+        </div>
+    </div>
+
+    <!-- Q2: Overview -->
+    <div class="question-block">
+        <div class="question-number">Question 2</div>
+        <div class="question-type">Short Answer</div>
+        <div class="question-text">Name 2 of the 4 key statistics mentioned in the Overview section.</div>
+        <textarea placeholder="Write your answer here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(2)">Reveal Answer Ideas</button>
+        <div class="answer-key" id="answer-2">
+            <h4>Possible Answers:</h4>
+            <p>• 28% of Black teens on TikTok "almost constantly"<br>
+            • 45.9% of Black students report experiencing racism at school<br>
+            • 83% of HBCU students report belonging vs. 72% at PWIs<br>
+            • 49 million Gen Z eligible to vote in 2026; 5.7 million are Black youth</p>
+        </div>
+    </div>
+
+    <!-- Q3: Digital Spaces -->
+    <div class="question-block">
+        <div class="question-number">Question 3</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">According to the guide, what is #BlackTikTok?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q3" value="a"> A) A hashtag for entertainment only</label>
+            <label class="option"><input type="radio" name="q3" value="b"> B) A decentralized classroom where Gen Z teaches itself history, culture, and resistance</label>
+            <label class="option"><input type="radio" name="q3" value="c"> C) A marketing tool for companies</label>
+            <label class="option"><input type="radio" name="q3" value="d"> D) A trend that's already over</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(3)">Reveal Answer</button>
+        <div class="answer-key" id="answer-3">
+            <h4>✓ Correct Answer: B</h4>
+            <p>#BlackTikTok represents decentralized learning where Black Gen Z teaches itself about history, culture, and resistance outside of traditional systems.</p>
+        </div>
+    </div>
+
+    <!-- Q4: Digital Spaces -->
+    <div class="question-block">
+        <div class="question-number">Question 4</div>
+        <div class="question-type">Short Answer</div>
+        <div class="question-text">What does "code-switching" mean as described in the guide?</div>
+        <textarea placeholder="Write your answer here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(4)">Reveal Answer Ideas</button>
+        <div class="answer-key" id="answer-4">
+            <h4>Possible Answers:</h4>
+            <p>• Presenting a different version of yourself in different spaces (e.g., at Buckley vs. online)<br>
+            • Constantly negotiating between your authentic self and an adapted self<br>
+            • The cognitive and emotional work of managing multiple identities<br>
+            • The chronic stress from switching between different versions of yourself</p>
+        </div>
+    </div>
+
+    <!-- Q5: Digital Spaces Creator -->
+    <div class="question-block">
+        <div class="question-number">Question 5</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">Who is Kahlil Greene and what is he known for?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q5" value="a"> A) A student at Buckley who started a club</label>
+            <label class="option"><input type="radio" name="q5" value="b"> B) A TikTok creator with 639K+ followers known as "The Gen Z Historian" who teaches Black history</label>
+            <label class="option"><input type="radio" name="q5" value="c"> C) A professor at UC Berkeley</label>
+            <label class="option"><input type="radio" name="q5" value="d"> D) A student at an HBCU</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(5)">Reveal Answer</button>
+        <div class="answer-key" id="answer-5">
+            <h4>✓ Correct Answer: B</h4>
+            <p>Kahlil Greene (@kahlilgreene) is a TikTok creator with 639K+ followers known as "The Gen Z Historian" who uses his platform to teach Black history and call out cultural appropriation.</p>
+        </div>
+    </div>
+
+    <!-- Q6: Mental Health -->
+    <div class="question-block">
+        <div class="question-number">Question 6</div>
+        <div class="question-type">Short Answer</div>
+        <div class="question-text">Name 3 of the 6 protective factors in the Black Youth Thriving Framework.</div>
+        <textarea placeholder="Write your answer here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(6)">Reveal Answer Ideas</button>
+        <div class="answer-key" id="answer-6">
+            <h4>All 6 Protective Factors:</h4>
+            <p>1. Intrapersonal Assets (beliefs in yourself, resilience)<br>
+            2. Kinship Support (family, close relationships)<br>
+            3. Collective Socialization (community teaching about culture/power)<br>
+            4. Black Cultural Identity (pride, knowledge, connection to heritage)<br>
+            5. Hope & Future Orientation (belief in better futures)<br>
+            6. Religious/Spiritual Coping (practices that ground you)</p>
+        </div>
+    </div>
+
+    <!-- Q7: Mental Health -->
+    <div class="question-block">
+        <div class="question-number">Question 7</div>
+        <div class="question-type">True/False</div>
+        <div class="question-text">True or False: According to research, code-switching at a PWI creates real cognitive load and stress.</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q7" value="a"> A) True</label>
+            <label class="option"><input type="radio" name="q7" value="b"> B) False</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(7)">Reveal Answer</button>
+        <div class="answer-key" id="answer-7">
+            <h4>✓ Correct Answer: True</h4>
+            <p>The science is clear: constantly navigating between authentic self and adapted self creates cognitive load, hypervigilance, and measurable health impacts.</p>
+        </div>
+    </div>
+
+    <!-- Q8: Mental Health Outcomes -->
+    <div class="question-block">
+        <div class="question-number">Question 8</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">What is the major difference in mental health outcomes between HBCU and PWI students?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q8" value="a"> A) HBCU students have higher anxiety</label>
+            <label class="option"><input type="radio" name="q8" value="b"> B) PWI students have higher rates of depression</label>
+            <label class="option"><input type="radio" name="q8" value="c"> C) HBCU students report 83% sense of belonging vs. 72% at PWIs and 36% national average</label>
+            <label class="option"><input type="radio" name="q8" value="d"> D) There is no difference</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(8)">Reveal Answer</button>
+        <div class="answer-key" id="answer-8">
+            <h4>✓ Correct Answer: C</h4>
+            <p>Data shows 83% of HBCU students report strong belonging compared to 72% at PWIs and 36% nationally. This measurable difference impacts mental health and wellbeing.</p>
+        </div>
+    </div>
+
+    <!-- Q9: Mental Health Reflection -->
+    <div class="question-block">
+        <div class="question-number">Question 9</div>
+        <div class="question-type">Reflection</div>
+        <div class="question-text">Which of the 6 protective factors do you currently have the most access to, and which one needs more attention in your life?</div>
+        <textarea placeholder="Write your reflection here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(9)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-9">
+            <h4>Reflection Prompt:</h4>
+            <p>Your answer should show thoughtful self-assessment. Think about:<br>
+            • Which factors are strongest right now (family support? cultural identity? spiritual practices?)<br>
+            • Which one needs more intentional work<br>
+            • What specific action could you take to strengthen that factor</p>
+        </div>
+    </div>
+
+    <!-- Q10: Civic Power -->
+    <div class="question-block">
+        <div class="question-number">Question 10</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">How many Gen Z youth are eligible to vote in 2026?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q10" value="a"> A) 25 million</label>
+            <label class="option"><input type="radio" name="q10" value="b"> B) 35 million</label>
+            <label class="option"><input type="radio" name="q10" value="c"> C) 49 million</label>
+            <label class="option"><input type="radio" name="q10" value="d"> D) 60 million</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(10)">Reveal Answer</button>
+        <div class="answer-key" id="answer-10">
+            <h4>✓ Correct Answer: C</h4>
+            <p>49 million Gen Z youth are eligible to vote in 2026, with 5.7 million of those being Black youth. That's real political power.</p>
+        </div>
+    </div>
+
+    <!-- Q11: Civic Power -->
+    <div class="question-block">
+        <div class="question-number">Question 11</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">What is the real reason for lower Black youth voter turnout, according to the guide?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q11" value="a"> A) Lack of interest</label>
+            <label class="option"><input type="radio" name="q11" value="b"> B) Not understanding politics</label>
+            <label class="option"><input type="radio" name="q11" value="c"> C) Economic barriers (time, transportation, childcare, work)</label>
+            <label class="option"><input type="radio" name="q11" value="d"> D) Not being eligible</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(11)">Reveal Answer</button>
+        <div class="answer-key" id="answer-11">
+            <h4>✓ Correct Answer: C</h4>
+            <p>89% of Black youth say they're willing to vote. The gap is interest—it's economic barriers. When barriers are removed, Black youth show up.</p>
+        </div>
+    </div>
+
+    <!-- Q12: Civic Power Policy -->
+    <div class="question-block">
+        <div class="question-number">Question 12</div>
+        <div class="question-type">Short Answer</div>
+        <div class="question-text">What is AB3121 and why does it matter to you?</div>
+        <textarea placeholder="Write your answer here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(12)">Reveal Answer Ideas</button>
+        <div class="answer-key" id="answer-12">
+            <h4>Possible Answers:</h4>
+            <p>• AB3121 is the California Reparations Task Force, authored by Dr. Shirley Weber<br>
+            • It directly affects Black Californians' lived reality and policy outcomes<br>
+            • Understanding how policy is made and moved is part of leadership<br>
+            • It shows how young people's voices can shape state-level decisions</p>
+        </div>
+    </div>
+
+    <!-- Q13: LA & California Homelessness -->
+    <div class="question-block">
+        <div class="question-number">Question 13</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">What percentage of LA County's homeless population is Black?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q13" value="a"> A) 15%</label>
+            <label class="option"><input type="radio" name="q13" value="b"> B) 25%</label>
+            <label class="option"><input type="radio" name="q13" value="c"> C) 32%</label>
+            <label class="option"><input type="radio" name="q13" value="d"> D) 40%</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(13)">Reveal Answer</button>
+        <div class="answer-key" id="answer-13">
+            <h4>✓ Correct Answer: C</h4>
+            <p>32% of LA County's homeless population is Black, despite Black people being only 9.4% of the county's population. This is massive overrepresentation.</p>
+        </div>
+    </div>
+
+    <!-- Q14: California Equity Gap -->
+    <div class="question-block">
+        <div class="question-number">Question 14</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">According to the UCLA Bunche Center, how long would it take to close the equity gap between Black and White Californians at the current rate?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q14" value="a"> A) 50 years</label>
+            <label class="option"><input type="radio" name="q14" value="b"> B) 100 years</label>
+            <label class="option"><input type="radio" name="q14" value="c"> C) 180 years</label>
+            <label class="option"><input type="radio" name="q14" value="d"> D) 248 years</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(14)">Reveal Answer</button>
+        <div class="answer-key" id="answer-14">
+            <h4>✓ Correct Answer: D</h4>
+            <p>248 years at current rate. This shows how deep systemic inequities are and why sustained, strategic pressure is needed.</p>
+        </div>
+    </div>
+
+    <!-- Q15: Buckley Context -->
+    <div class="question-block">
+        <div class="question-number">Question 15</div>
+        <div class="question-type">Reflection</div>
+        <div class="question-text">In your own words, what does it mean that Buckley averages 3-8% Black enrollment while you're attending? How does that reality show up for you?</div>
+        <textarea placeholder="Write your reflection here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(15)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-15">
+            <h4>Reflection Prompt:</h4>
+            <p>Your answer should connect the data to your personal experience:<br>
+            • You're one of the few; this is systemic underrepresentation, not a personal flaw<br>
+            • What psychological/social challenges does this create?<br>
+            • How do you see this playing out in daily school life?</p>
+        </div>
+    </div>
+
+    <!-- Q16: PWI & HBCU SFFA -->
+    <div class="question-block">
+        <div class="question-number">Question 16</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">After SFFA (Supreme Court overturned affirmative action in June 2023), which school saw the biggest drop in Black enrollment?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q16" value="a"> A) Harvard (18% → 11.5%)</label>
+            <label class="option"><input type="radio" name="q16" value="b"> B) Princeton (9% → 5%)</label>
+            <label class="option"><input type="radio" name="q16" value="c"> C) Caltech (5% → 1.6%)</label>
+            <label class="option"><input type="radio" name="q16" value="d"> D) All saw major drops</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(16)">Reveal Answer</button>
+        <div class="answer-key" id="answer-16">
+            <h4>✓ Correct Answer: B</h4>
+            <p>Princeton dropped to 5%—its lowest enrollment since 1968. This is the landscape you're preparing for in college applications.</p>
+        </div>
+    </div>
+
+    <!-- Q17: PWI Risk Factors -->
+    <div class="question-block">
+        <div class="question-number">Question 17</div>
+        <div class="question-type">Short Answer</div>
+        <div class="question-text">Name 2 of the 5 PWI mental health risk factors.</div>
+        <textarea placeholder="Write your answer here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(17)">Reveal Answer Ideas</button>
+        <div class="answer-key" id="answer-17">
+            <h4>All 5 Risk Factors:</h4>
+            <p>1. Microaggressions (daily subtle racism, code-switching, hypervigilance)<br>
+            2. Racial Isolation (being one of few, eating at separate tables)<br>
+            3. Impostor Syndrome ("Did I really earn this?")<br>
+            4. White Institutional Presence (faculty, curriculum, norms built for white people)<br>
+            5. Lack of Resources (no affinity groups, limited culturally competent counseling)</p>
+        </div>
+    </div>
+
+    <!-- Q18: HBCU Graduation Rates -->
+    <div class="question-block">
+        <div class="question-number">Question 18</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">Which HBCU has the highest graduation rate?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q18" value="a"> A) Howard (60%)</label>
+            <label class="option"><input type="radio" name="q18" value="b"> B) Spelman (75%)</label>
+            <label class="option"><input type="radio" name="q18" value="c"> C) Morehouse (53%)</label>
+            <label class="option"><input type="radio" name="q18" value="d"> D) Hampton (64%)</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(18)">Reveal Answer</button>
+        <div class="answer-key" id="answer-18">
+            <h4>✓ Correct Answer: B</h4>
+            <p>Spelman College at 75%—the highest among HBCUs. #1 HBCU for 18 consecutive years.</p>
+        </div>
+    </div>
+
+    <!-- Q19: NC A&T -->
+    <div class="question-block">
+        <div class="question-number">Question 19</div>
+        <div class="question-type">Multiple Choice</div>
+        <div class="question-text">Which HBCU was the first ever to reach 15,000+ students?</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q19" value="a"> A) Howard University</label>
+            <label class="option"><input type="radio" name="q19" value="b"> B) NC A&T</label>
+            <label class="option"><input type="radio" name="q19" value="c"> C) Hampton</label>
+            <label class="option"><input type="radio" name="q19" value="d"> D) Fisk</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(19)">Reveal Answer</button>
+        <div class="answer-key" id="answer-19">
+            <h4>✓ Correct Answer: B</h4>
+            <p>NC A&T (15,275 students) is the first HBCU ever to reach 15K+. Also the only HBCU offering a Bachelor's in Artificial Intelligence.</p>
+        </div>
+    </div>
+
+    <!-- Q20: College Decision Reflection -->
+    <div class="question-block">
+        <div class="question-number">Question 20</div>
+        <div class="question-type">Essay</div>
+        <div class="question-text">If you were choosing a college today, what matters most to you: prestige, belonging, network, location, or mission? Explain why, using evidence from the guide.</div>
+        <textarea placeholder="Write your reflection here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(20)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-20">
+            <h4>Reflection Prompt:</h4>
+            <p>Your answer should show thinking about what will support YOUR thriving:<br>
+            • Name your priority and explain why<br>
+            • Connect to data from the guide (mental health outcomes, networks, etc.)<br>
+            • Show understanding that there's no "right" answer—it depends on what you need</p>
+        </div>
+    </div>
+
+    <!-- Q21: Student Voices -->
+    <div class="question-block">
+        <div class="question-number">Question 21</div>
+        <div class="question-type">Reflection</div>
+        <div class="question-text">Which student voice story resonated most with you and why?</div>
+        <textarea placeholder="Write your reflection here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(21)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-21">
+            <h4>Reflection Prompt:</h4>
+            <p>Your answer should show genuine reflection:<br>
+            • Which story felt most real to your experience?<br>
+            • What part of that story do you see in yourself?<br>
+            • What did you learn from that person's journey?</p>
+        </div>
+    </div>
+
+    <!-- Q22: Code-Switching Personal -->
+    <div class="question-block">
+        <div class="question-number">Question 22</div>
+        <div class="question-type">Reflection</div>
+        <div class="question-text">One student voice said: "I have to be open to questions about my culture or my hair...it's exhausting to be tokenized." Have you experienced this at Buckley? How did/would you respond?</div>
+        <textarea placeholder="Write your reflection here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(22)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-22">
+            <h4>Reflection Prompt:</h4>
+            <p>Your answer should show honest reflection:<br>
+            • Have you felt tokenized or asked to speak "for your people"?<br>
+            • What boundaries do you want to set?<br>
+            • How would you respond if this happened?</p>
+        </div>
+    </div>
+
+    <!-- Q23: Student Voices Accuracy -->
+    <div class="question-block">
+        <div class="question-number">Question 23</div>
+        <div class="question-type">True/False</div>
+        <div class="question-text">True or False: According to the student voices, all Black students at PWIs reported only negative experiences.</div>
+        <div class="options">
+            <label class="option"><input type="radio" name="q23" value="a"> A) True</label>
+            <label class="option"><input type="radio" name="q23" value="b"> B) False</label>
+        </div>
+        <button class="reveal-button" onclick="toggleAnswer(23)">Reveal Answer</button>
+        <div class="answer-key" id="answer-23">
+            <h4>✓ Correct Answer: False</h4>
+            <p>Several student voices talked about both challenges AND growth, real friendships, and learning to be confident. The experience is complex—not purely negative.</p>
+        </div>
+    </div>
+
+    <!-- Q24: HBCU Appeal -->
+    <div class="question-block">
+        <div class="question-number">Question 24</div>
+        <div class="question-type">Reflection</div>
+        <div class="question-text">What would it feel like to be in a space where being Black is the norm, not the exception? What appeals to you about that? What concerns you?</div>
+        <textarea placeholder="Write your reflection here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(24)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-24">
+            <h4>Reflection Prompt:</h4>
+            <p>Your answer should explore nuance:<br>
+            • Appeal: mental health? belonging? cultural affirmation?<br>
+            • Concerns: geographic distance? different academic culture?<br>
+            • Shows you're thinking seriously about HBCU vs. PWI choice</p>
+        </div>
+    </div>
+
+    <!-- Q25: Portfolio Impact -->
+    <div class="question-block">
+        <div class="question-number">Question 25</div>
+        <div class="question-type">Reflection</div>
+        <div class="question-text">What is ONE thing from this guide that changed how you think about your experience at Buckley?</div>
+        <textarea placeholder="Write your reflection here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(25)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-25">
+            <h4>Reflection Prompt:</h4>
+            <p>Your answer should show genuine learning:<br>
+            • What insight surprised you?<br>
+            • How does it reframe your Buckley experience?<br>
+            • Does it change how you see yourself or your community?</p>
+        </div>
+    </div>
+
+    <!-- Q26: Next Steps -->
+    <div class="question-block">
+        <div class="question-number">Question 26</div>
+        <div class="question-type">Reflection</div>
+        <div class="question-text">Which section of the guide would you want to learn more about? What additional research would you do?</div>
+        <textarea placeholder="Write your reflection here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(26)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-26">
+            <h4>Reflection Prompt:</h4>
+            <p>Your answer should show curiosity and agency:<br>
+            • Which topic sparked the most interest?<br>
+            • What questions do you still have?<br>
+            • How would you continue learning about this?</p>
+        </div>
+    </div>
+
+    <!-- Q27: ESSAY QUESTION -->
+    <div class="question-block">
+        <div class="question-number">Question 27 (Final Essay)</div>
+        <div class="question-type">Essay Question</div>
+        <div class="question-text">You're entering the AALT program as a 16-year-old at an elite prep school where you're one of the few Black students. Using what you've learned from this guide, write a 1-2 paragraph reflection on: What does "navigate and thrive" mean to you personally? How will you protect your mental health? What communities or practices will help you belong?</div>
+        <textarea placeholder="Write your essay here..."></textarea>
+        <button class="reveal-button" onclick="toggleAnswer(27)">Show Reflection Prompt</button>
+        <div class="answer-key" id="answer-27">
+            <h4>Reflection Prompt for Your Essay:</h4>
+            <p>Your answer should connect personal experience to frameworks from the guide:<br>
+            • Navigate = being intentional about code-switching and identity<br>
+            • Thrive = more than surviving; it's flourishing<br>
+            • Mention specific protective factors or student voices that resonated<br>
+            • Identify concrete communities/practices (affinity groups? mentors? spiritual practices?)<br>
+            • Show that you have agency in shaping your experience</p>
+        </div>
+    </div>
+
+    <!-- Completion Message -->
+    <div class="completion-message">
+        <h2>🎉 You Did It!</h2>
+        <p>You've completed all 27 questions in the Navigate & Thrive Assessment.</p>
+        <p style="margin-top: 30px;">Now go back through your answers. Reveal each answer and reflect on what you wrote.</p>
+        <p style="margin-top: 20px; font-style: italic; color: var(--accent);">This assessment is about YOUR thinking, not getting things "right." The deepest learning happens when you sit with what you know and what you're still figuring out.</p>
+        <button class="nav" onclick="restartQuiz()">Start Over</button>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav" id="prev-btn" onclick="changeQuestion(-1)" disabled>← Previous</button>
+        <button class="nav" id="next-btn" onclick="changeQuestion(1)">Next →</button>
+    </div>
+</div>
+
+<footer>
+    <p><strong>Navigate & Thrive: Self-Check Assessment</strong></p>
+    <p>27 questions | All 8 sections | Self-paced learning</p>
+    <p style="margin-top: 20px; font-size: 0.9em;">Take your time. Reflect deeply. Build your own thinking.</p>
+</footer>
+
+<script>
+    let currentQuestion = 1;
+    const totalQuestions = 27;
+
+    function openQuestion(n) {
+        const blocks = document.querySelectorAll('.question-block');
+        const completion = document.querySelector('.completion-message');
+        
+        if (n < 1) n = 1;
+        if (n > totalQuestions) {
+            blocks.forEach(block => block.classList.remove('active'));
+            completion.classList.add('active');
+            document.getElementById('prev-btn').disabled = false;
+            document.getElementById('next-btn').disabled = true;
+            return;
+        }
+        
+        blocks.forEach(block => block.classList.remove('active'));
+        completion.classList.remove('active');
+        blocks[n - 1].classList.add('active');
+        
+        document.getElementById('current-question').textContent = n;
+        document.getElementById('prev-btn').disabled = n === 1;
+        document.getElementById('next-btn').disabled = false;
+        
+        updateProgressBar(n);
+        window.scrollTo(0, 0);
+    }
+
+    function changeQuestion(n) {
+        currentQuestion += n;
+        openQuestion(currentQuestion);
+    }
+
+    function toggleAnswer(questionNum) {
+        const answerKey = document.getElementById('answer-' + questionNum);
+        const button = event.target;
+        
+        answerKey.classList.toggle('revealed');
+        button.classList.toggle('revealed');
+        
+        if (answerKey.classList.contains('revealed')) {
+            button.textContent = button.textContent.replace('Reveal', 'Hide');
+        } else {
+            button.textContent = button.textContent.replace('Hide', 'Reveal');
+        }
+    }
+
+    function updateProgressBar(n) {
+        const percentage = (n / totalQuestions) * 100;
+        document.getElementById('progress-fill').style.width = percentage + '%';
+    }
+
+    function restartQuiz() {
+        currentQuestion = 1;
+        openQuestion(1);
+        document.querySelectorAll('.answer-key').forEach(ak => ak.classList.remove('revealed'));
+        document.querySelectorAll('.reveal-button').forEach(btn => {
+            btn.classList.remove('revealed');
+            btn.textContent = btn.textContent.replace('Hide', 'Reveal');
+        });
+    }
+
+    // Initialize
+    openQuestion(1);
+</script>
+
+</body>
+</html>
